@@ -1,10 +1,12 @@
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from selection.models import Selection
-from selection.serializers import SelectionSerializer, SelectionPostSerializer, SelectionDetailSerializer
+from selection.permissions import SelectionUpdatePermission
+from selection.serializers import SelectionSerializer, SelectionPostSerializer, SelectionDetailSerializer, \
+    SelectionUpdateSerializer, SelectionDeleteSerializer
 
 
 class SelectionListView(ListAPIView):
@@ -26,3 +28,16 @@ class SelectionCreateView(CreateAPIView):
 class SelectionDetailView(RetrieveAPIView):
     queryset = Selection.objects.all()
     serializer_class = SelectionDetailSerializer
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class SelectionUpdateView(UpdateAPIView):
+    queryset = Selection.objects.all()
+    serializer_class = SelectionUpdateSerializer
+    permission_classes = [IsAuthenticated, SelectionUpdatePermission]
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class SelectionDeleteView(DestroyAPIView):
+    queryset = Selection.objects.all()
+    serializer_class = SelectionDeleteSerializer

@@ -25,3 +25,17 @@ class SelectionDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Selection
         fields = ('id', 'name', 'owner', 'items',)
+
+
+class SelectionUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Selection
+        fields = ('name', 'items')
+
+
+class SelectionDeleteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Selection
+        fields = ('id',)
