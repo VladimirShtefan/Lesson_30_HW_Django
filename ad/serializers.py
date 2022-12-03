@@ -64,3 +64,10 @@ class AdPatchSerializer(PatchModelSerializer):
     class Meta:
         model = Ad
         fields = '__all__'
+
+
+class AdDestroySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Ad
+        fields = ('id',)
