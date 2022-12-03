@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.permissions import IsAuthenticated
 
 from ad.serializers import AdListSerializer, AdPostSerializer, AdPatchSerializer, AdDestroySerializer
 from ad.serializers import Ad
@@ -49,6 +50,7 @@ class AdCreateView(CreateAPIView):
 class AdDetailView(RetrieveAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdListSerializer
+    permission_classes = [IsAuthenticated]
 
 
 @method_decorator(csrf_exempt, name="dispatch")
