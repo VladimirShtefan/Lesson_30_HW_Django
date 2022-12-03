@@ -71,3 +71,12 @@ class AdDestroySerializer(serializers.ModelSerializer):
     class Meta:
         model = Ad
         fields = ('id',)
+
+
+class AdSerializerCompressed(serializers.ModelSerializer):
+    author = serializers.SlugRelatedField(slug_field='username',  read_only=True)
+    category = serializers.SlugRelatedField(many=True, slug_field='name', read_only=True)
+
+    class Meta:
+        model = Ad
+        fields = ('id', 'name', 'price', 'description', 'image', 'is_published', 'author', 'category',)

@@ -12,7 +12,7 @@ class User(AbstractUser):
     ]
 
     role = models.CharField(max_length=9, choices=ROLES, default="member", verbose_name='Роль')
-    age = models.SmallIntegerField(verbose_name='Возраст')
+    age = models.PositiveSmallIntegerField(verbose_name='Возраст')
     location = models.ForeignKey(Location, on_delete=models.CASCADE, verbose_name='Местоположение')
 
     class Meta:
