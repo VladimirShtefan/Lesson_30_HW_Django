@@ -5,6 +5,4 @@ class AdOwnerPermission(BasePermission):
     message = 'Вы не являетесь владельцем'
 
     def has_object_permission(self, request, view, obj):
-        if request.user == obj.author or request.user.role in ('admin', 'moderator'):
-            return True
-        return False
+        return request.user == obj.author or request.user.role in ('admin', 'moderator')
