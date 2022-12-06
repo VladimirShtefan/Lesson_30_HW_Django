@@ -35,10 +35,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'ad.apps.AdConfig',
     'category.apps.CategoryConfig',
     'user.apps.UserConfig',
     'location.apps.LocationConfig',
+    'selection.apps.SelectionConfig',
 ]
 
 MIDDLEWARE = [
@@ -152,5 +154,14 @@ TOTAL_ON_PAGE = 2
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 3
+    'PAGE_SIZE': 3,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
+
+SIMPLE_JWT = {
+    'ROTATE_REFRESH_TOKENS': True,
+}
+
+AUTH_USER_MODEL = 'user.User'
